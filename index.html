@@ -25,8 +25,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    
-
     <script>
         tailwind.config = {
             theme: {
@@ -64,50 +62,60 @@
         .card-hover:hover { border-color: #FF3E00; transform: translateY(-5px); transition: all 0.3s ease; }
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; z-index: 100; transition: transform 0.3s; }
         .whatsapp-float:hover { transform: scale(1.1); }
+        
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        #mobile-menu.open {
+            max-height: 500px;
+            opacity: 1;
+            padding: 20px 0;
+        }
     </style>
 </head>
 <body>
 
     <header class="fixed w-full z-50 transition-all duration-300 bg-black/80 backdrop-blur-md border-b border-white/5">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        
-        <a href="/" 
-           onclick="window.location.reload(); return false;" 
-           class="font-display font-bold text-2xl tracking-tighter text-white no-underline transition-all hover:opacity-80 active:scale-95">
-            MUMPI<span class="text-brand-orange">.</span>
-        </a>
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            
+            <a href="/" onclick="window.location.reload(); return false;" class="font-display font-bold text-2xl tracking-tighter text-white no-underline transition-all hover:opacity-80 active:scale-95">
+                MUMPI<span class="text-brand-orange">.</span>
+            </a>
 
-        <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest">
-            <a href="#hero" class="hover:text-brand-orange transition text-white no-underline">
-                Home
-            </a>
-            <a href="#sobre" class="hover:text-brand-orange transition text-white no-underline">
-                A MUMPI<span class="text-brand-orange">.</span>
-            </a>
-            <a href="#services" class="hover:text-brand-orange transition text-white no-underline">
-                Serviços
-            </a>
-            <a href="#projects" class="hover:text-brand-orange transition text-white no-underline">
-                Projetos Realizados
-            </a>
-            <a href="#testimonials" class="hover:text-brand-orange transition text-white no-underline">
-                Depoimentos
-            </a>
-            <a href="#contato" class="hover:text-brand-orange transition text-white no-underline">
-                Contato
-            </a>
-        </div>
+            <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest">
+                <a href="#hero" class="hover:text-brand-orange transition text-white no-underline">Home</a>
+                <a href="#sobre" class="hover:text-brand-orange transition text-white no-underline">A MUMPI.</a>
+                <a href="#services" class="hover:text-brand-orange transition text-white no-underline">Serviços</a>
+                <a href="#projects" class="hover:text-brand-orange transition text-white no-underline text-nowrap">Projetos Realizados</a>
+                <a href="#testimonials" class="hover:text-brand-orange transition text-white no-underline">Depoimentos</a>
+                <a href="#contato" class="hover:text-brand-orange transition text-white no-underline">Contato</a>
+            </div>
 
-        <a href="https://wa.me/5511998765432?text=Olá! Gostaria de solicitar um orçamento para meu veículo no Ateliê Mumpi." 
-           target="_blank" 
-           class="no-underline">
-            <button class="bg-brand-orange text-white px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-orange-700 transition border-0 cursor-pointer">
-                Orçamento via WhatsApp
+            <a href="https://wa.me/5511998765432?text=Olá! Gostaria de solicitar um orçamento para meu veículo no Ateliê Mumpi." target="_blank" class="no-underline hidden md:block">
+                <button class="bg-brand-orange text-white px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-orange-700 transition border-0 cursor-pointer">
+                    Orçamento via WhatsApp
+                </button>
+            </a>
+
+            <button id="hamburger-btn" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
             </button>
-        </a>
+        </nav>
 
-    </nav>
-</header>
+        <div id="mobile-menu" class="md:hidden bg-brand-black border-t border-white/5">
+            <div class="container mx-auto px-6 flex flex-col space-y-4 text-xs font-bold uppercase tracking-widest">
+                <a href="#hero" class="mobile-link text-white no-underline hover:text-brand-orange">Home</a>
+                <a href="#sobre" class="mobile-link text-white no-underline hover:text-brand-orange">A MUMPI.</a>
+                <a href="#services" class="mobile-link text-white no-underline hover:text-brand-orange">Serviços</a>
+                <a href="#projects" class="mobile-link text-white no-underline hover:text-brand-orange">Projetos Realizados</a>
+                <a href="#testimonials" class="mobile-link text-white no-underline hover:text-brand-orange">Depoimentos</a>
+                <a href="#contato" class="mobile-link text-white no-underline hover:text-brand-orange">Contato</a>
+            </div>
+        </div>
+    </header>
 
     <section id="hero" class="relative h-screen w-full overflow-hidden flex items-center bg-black">
         <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&q=80&w=1920" class="absolute w-full h-full object-cover grayscale opacity-40 pointer-events-none">
@@ -119,7 +127,7 @@
                 <span class="text-brand-orange font-bold tracking-[0.3em] text-sm mb-4 block uppercase">Premium Car Styling</span>
                 <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight mb-6 text-white">
                     A ARTE DA <br> 
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-600">PERFORMANCE</span> VISUAL.
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-600 uppercase">Performance</span> Visual.
                 </h1>
                 <p class="text-gray-300 text-lg mb-8 max-w-xl">Na Mumpi, não apenas modificamos, nós criamos assinaturas únicas para o seu veículo.</p>
                 <div class="flex flex-col sm:flex-row gap-4">
@@ -130,35 +138,33 @@
         </div>
     </section>
 
-<section id="sobre" class="py-24 bg-black relative overflow-hidden">
-    <div class="container mx-auto px-6 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="relative">
-                <img src="haval.png"alt="Detalhe de um carro em estética automotiva" class="w-full h-[450px] object-cover glass border border-white/10 p-2 transform hover:scale-[1.01] transition-transform duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div class="absolute bottom-6 left-6 text-white text-3xl font-display uppercase italic">
-                    <span class="text-brand-orange text-outline-white">MUMPI.</span> Excelência
+    <section id="sobre" class="py-24 bg-black relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img src="haval.png" alt="Detalhe de um carro em estética automotiva" class="w-full h-[450px] object-cover glass border border-white/10 p-2 transform hover:scale-[1.01] transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white text-3xl font-display uppercase italic">
+                        <span class="text-brand-orange">MUMPI.</span> Excelência
+                    </div>
+                </div>
+                <div>
+                    <h2 class="font-display text-4xl md:text-5xl text-white mb-6 uppercase tracking-tighter leading-tight">
+                        O DNA da <span class="text-brand-orange">MUMPI.</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                        Na <span class="text-brand-orange font-bold">MUMPI Original Estúdio</span>, elevamos a estética automotiva a um novo patamar. Não somos apenas prestadores de serviço; somos artesãos apaixonados pela perfeição.
+                    </p>
+                    <p class="text-gray-500 text-base mb-8 leading-relaxed">
+                        Cada veículo é tratado como uma obra de arte única, utilizando insumos de alta tecnologia e as técnicas mais avançadas do mercado.
+                    </p>
+                    <a href="#contato" class="inline-block bg-brand-orange text-white px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-orange-700 transition border-0 text-decoration-none">
+                        Agende sua Transformação
+                    </a>
                 </div>
             </div>
-
-            <div>
-                <h2 class="font-display text-4xl md:text-5xl text-white mb-6 uppercase tracking-tighter leading-tight">
-                    O DNA da <span class="text-brand-orange text-outline-white">MUMPI.</span>
-                </h2>
-                <p class="text-gray-400 text-lg mb-6 leading-relaxed">
-                    Na <span class="text-brand-orange font-bold">MUMPI Original Estúdio</span>, elevamos a estética automotiva a um novo patamar. Não somos apenas prestadores de serviço; somos artesãos apaixonados pela perfeição, combinando a precisão da engenharia alemã com a paixão e criatividade brasileira.
-                </p>
-                <p class="text-gray-500 text-base mb-8 leading-relaxed">
-                    Cada veículo é tratado como uma obra de arte única, utilizando insumos de alta tecnologia e as técnicas mais avançadas do mercado. Nossa missão é redefinir o conceito de estilo sobre rodas, proporcionando uma experiência exclusiva e resultados que superam todas as expectativas. Convidamos você a conhecer a excelência que só a MUMPI pode oferecer.
-                </p>
-                <a href="#contato" class="inline-block bg-brand-orange text-white px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-orange-700 transition border-0 text-decoration-none">
-                    Agende sua Transformação
-                </a>
-            </div>
         </div>
-    </div>
-</section>
-
+    </section>
 
     <section id="stats" class="py-12 bg-brand-orange">
         <div class="container mx-auto px-6 flex flex-wrap justify-around items-center gap-8">
@@ -179,22 +185,22 @@
 
     <section id="services" class="py-24 bg-brand-black">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="font-display text-4xl font-bold mb-4">NOSSO EXPERTISE</h2>
+            <h2 class="font-display text-4xl font-bold mb-4 uppercase">Nosso Expertise</h2>
             <div class="h-1 w-20 bg-brand-orange mx-auto mb-20"></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="glass p-8 card-hover group cursor-pointer">
                     <i class="fas fa-layer-group text-brand-orange text-4xl mb-6"></i>
-                    <h4 class="font-display text-xl mb-4 text-white">Envelopamento</h4>
+                    <h4 class="font-display text-xl mb-4 text-white uppercase">Envelopamento</h4>
                     <p class="text-gray-400 text-sm">Proteção e mudança de cor com acabamento de estúdio.</p>
                 </div>
                 <div class="glass p-8 card-hover border-brand-cyan/20 cursor-pointer">
                     <i class="fas fa-bolt text-brand-cyan text-4xl mb-6"></i>
-                    <h4 class="font-display text-xl mb-4 text-brand-cyan">Linha EV</h4>
+                    <h4 class="font-display text-xl mb-4 text-brand-cyan uppercase">Linha EV</h4>
                     <p class="text-gray-400 text-sm">Customização dedicada para Tesla, BYD e elétricos premium.</p>
                 </div>
                 <div class="glass p-8 card-hover cursor-pointer">
                     <i class="fas fa-car text-brand-orange text-4xl mb-6"></i>
-                    <h4 class="font-display text-xl mb-4 text-white">Performance</h4>
+                    <h4 class="font-display text-xl mb-4 text-white uppercase">Performance</h4>
                     <p class="text-gray-400 text-sm">Body kits e rodas que transformam a aerodinâmica.</p>
                 </div>
             </div>
@@ -202,213 +208,198 @@
     </section>
 
     <section id="projects" class="py-24 bg-brand-black">
-    <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="font-display text-4xl font-bold mb-4 uppercase text-white">Projetos Realizados</h2>
-            <div class="h-1 w-20 bg-brand-orange mx-auto mb-4"></div>
-            <p class="text-gray-500 uppercase tracking-widest text-xs">Transformando carros reais em máquinas únicas</p>
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold mb-4 uppercase text-white">Projetos Realizados</h2>
+                <div class="h-1 w-20 bg-brand-orange mx-auto mb-4"></div>
+                <p class="text-gray-500 uppercase tracking-widest text-xs">Transformando carros reais em máquinas únicas</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
+                    <div class="relative overflow-hidden group">
+                        <img src="gol.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="VW Gol">
+                        <div class="absolute top-4 left-4 bg-brand-orange text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Popular Premium</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-lg text-white mb-2 uppercase">VW GOL G8</h3>
+                        <p class="text-gray-500 text-xs mb-6">Estética minimalista com teto Black Piano e film cerâmico.</p>
+                        <button onclick="toggleDetail('detail1')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
+                    </div>
+                    <div id="detail1" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Projeto focado no uso diário. Aplicamos vitrificação de pintura para facilitar a lavagem e proteção térmica nos vidros.</p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
+                    <div class="relative overflow-hidden group">
+                        <img src="opala.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Opala Antigo">
+                        <div class="absolute top-4 left-4 bg-yellow-600 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Old School</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-lg text-white mb-2 uppercase">CHEVROLET OPALA</h3>
+                        <p class="text-gray-500 text-xs mb-6">Restauração de brilho e polimento técnico de cromados.</p>
+                        <button onclick="toggleDetail('detail2')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
+                    </div>
+                    <div id="detail2" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Resgatamos a alma do clássico. Polimento em 3 etapas para remover riscos de décadas e selante cerâmico.</p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-cyan/40 h-fit overflow-hidden">
+                    <div class="relative overflow-hidden group">
+                        <img src="onix.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Chevrolet Onix">
+                        <div class="absolute top-4 left-4 bg-brand-cyan text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Daily Drive</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-lg text-white mb-2 uppercase">CHEVROLET ONIX</h3>
+                        <p class="text-gray-500 text-xs mb-6">Chrome delete total e detalhamento interno premium.</p>
+                        <button onclick="toggleDetail('detail3')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-black transition">Saiba Mais</button>
+                    </div>
+                    <div id="detail3" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Visual agressivo removendo todos os detalhes cromados originais. Interior higienizado com proteção de plásticos UV.</p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
+                    <div class="relative overflow-hidden group">
+                        <img src="hb20.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="HB20">
+                        <div class="absolute top-4 left-4 bg-brand-orange text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Estética</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-lg text-white mb-2 uppercase">HYUNDAI HB20</h3>
+                        <p class="text-gray-500 text-xs mb-6">Proteção de pintura 9H e descontaminação ferrosa.</p>
+                        <button onclick="toggleDetail('detail4')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
+                    </div>
+                    <div id="detail4" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Carro de frota transformado. Pintura revigorada e protegida contra as intempéries da cidade.</p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
+                    <div class="relative overflow-hidden group">
+                        <img src="maveco.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Ford Maverick">
+                        <div class="absolute top-4 left-4 bg-red-700 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Muscle BR</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-lg text-white mb-2 uppercase">FORD MAVERICK</h3>
+                        <p class="text-gray-500 text-xs mb-6">Correção de pintura e proteção de chassi.</p>
+                        <button onclick="toggleDetail('detail5')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
+                    </div>
+                    <div id="detail5" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Limpeza criogênica de motor e chassi, seguida de proteção anticorrosiva.</p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-cyan/40 h-fit overflow-hidden">
+                    <div class="relative overflow-hidden group">
+                        <img src="argo.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Fiat Argo">
+                        <div class="absolute top-4 left-4 bg-brand-cyan text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Urban Up</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-lg text-white mb-2 uppercase">FIAT ARGO</h3>
+                        <p class="text-gray-500 text-xs mb-6">Pintura de pinças em Laranja Mumpi e rodas Gloss Black.</p>
+                        <button onclick="toggleDetail('detail6')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-black transition">Saiba Mais</button>
+                    </div>
+                    <div id="detail6" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Customização de rodas e pinças para um visual esportivo discreto.</p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
+                    <div class="relative overflow-hidden group">
+                        <img src="agile.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Agile">
+                        <div class="absolute top-4 left-4 bg-brand-orange text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Revitalização</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-lg text-white mb-2 uppercase">CHEVROLET AGILE LTZ</h3>
+                        <p class="text-gray-500 text-xs mb-6">Revitalização de faróis e higienização interna técnica.</p>
+                        <button onclick="toggleDetail('detail7')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
+                    </div>
+                    <div id="detail7" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Polimento específico de faróis e proteção UV duradoura.</p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-cyan/40 h-fit overflow-hidden">
+                    <div class="relative overflow-hidden group">
+                        <img src="fit.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Honda Fit">
+                        <div class="absolute top-4 left-4 bg-brand-cyan text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Daily care</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-lg text-white mb-2 uppercase">HONDA FIT AT 2006</h3>
+                        <p class="text-gray-500 text-xs mb-6">Polimento comercial e selagem de pintura com cera premium.</p>
+                        <button onclick="toggleDetail('detail8')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-black transition">Saiba Mais</button>
+                    </div>
+                    <div id="detail8" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Tratamento focado em brilho e proteção contra intempéries.</p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
+                    <div class="relative overflow-hidden group">
+                        <img src="civic.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Civic">
+                        <div class="absolute top-4 left-4 bg-gray-600 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Iconic</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-lg text-white mb-2 uppercase">HONDA CIVIC LXL</h3>
+                        <p class="text-gray-500 text-xs mb-6">Descontaminação de pintura e aplicação de coating rápido.</p>
+                        <button onclick="toggleDetail('detail9')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
+                    </div>
+                    <div id="detail9" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Removemos impurezas da lataria e finalizamos com proteção hidrofóbica.</p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-cyan/40 h-fit overflow-hidden">
+                    <div class="relative overflow-hidden group">
+                        <img src="king.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="BYD King">
+                        <div class="absolute top-4 left-4 bg-brand-cyan text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest">EV Next Gen</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-lg text-white mb-2 uppercase">BYD KING</h3>
+                        <p class="text-gray-500 text-xs mb-6">Proteção PPF Full e otimização de interface interna.</p>
+                        <button onclick="toggleDetail('detail10')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-black transition">Saiba Mais</button>
+                    </div>
+                    <div id="detail10" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Blindagem invisível com PPF de alta regeneração.</p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
+                    <div class="relative overflow-hidden group">
+                        <img src="x2.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="BMW X2">
+                        <div class="absolute top-4 left-4 bg-brand-orange text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Matte Wrap</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-lg text-white mb-2 uppercase">BMW X2</h3>
+                        <p class="text-gray-500 text-xs mb-6">Envelopamento Fosco e suspensão preparada.</p>
+                        <button onclick="toggleDetail('detail11')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
+                    </div>
+                    <div id="detail11" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Acabamento Matte Satin e rebaixamento milimétrico.</p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-cyan/40 h-fit overflow-hidden">
+                    <div class="relative overflow-hidden group">
+                        <img src="golf.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="VW Golf">
+                        <div class="absolute top-4 left-4 bg-brand-cyan text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Aerodynamics</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-lg text-white mb-2 uppercase">VW GOLF MK7.5</h3>
+                        <p class="text-gray-500 text-xs mb-6">Full Body Kit e rodas forjadas sob medida.</p>
+                        <button onclick="toggleDetail('detail12')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-black transition">Saiba Mais</button>
+                    </div>
+                    <div id="detail12" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Customização total de performance aerodinâmica e visual.</p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
-                <div class="relative overflow-hidden group">
-                    <img src="gol.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="VW Gol">
-                    <div class="absolute top-4 left-4 bg-brand-orange text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Popular Premium</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-display text-lg text-white mb-2 uppercase text-decoration-none">VW GOL G8</h3>
-                    <p class="text-gray-500 text-xs mb-6">Estética minimalista com teto Black Piano e film cerâmico.</p>
-                    <button onclick="toggleDetail('detail1')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
-                </div>
-                <div id="detail1" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
-                    <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Projeto focado no uso diário. Aplicamos vitrificação de pintura para facilitar a lavagem e proteção térmica nos vidros.</p>
-                </div>
-            </div>
-
-            <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
-                <div class="relative overflow-hidden group">
-                    <img src="opala.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Opala Antigo">
-                    <div class="absolute top-4 left-4 bg-yellow-600 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Old School</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-display text-lg text-white mb-2 uppercase text-decoration-none">CHEVROLET OPALA</h3>
-                    <p class="text-gray-500 text-xs mb-6">Restauração de brilho e polimento técnico de cromados.</p>
-                    <button onclick="toggleDetail('detail2')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
-                </div>
-                <div id="detail2" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
-                    <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Resgatamos a alma do clássico. Polimento em 3 etapas para remover riscos de décadas e selante cerâmico.</p>
-                </div>
-            </div>
-
-            <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-cyan/40 h-fit overflow-hidden">
-                <div class="relative overflow-hidden group">
-                    <img src="onix.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Chevrolet Onix">
-                    <div class="absolute top-4 left-4 bg-brand-cyan text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Daily Drive</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-display text-lg text-white mb-2 uppercase text-decoration-none">CHEVROLET ONIX</h3>
-                    <p class="text-gray-500 text-xs mb-6">Chrome delete total e detalhamento interno premium.</p>
-                    <button onclick="toggleDetail('detail3')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-black transition">Saiba Mais</button>
-                </div>
-                <div id="detail3" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
-                    <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Visual agressivo removendo todos os detalhes cromados originais. Interior higienizado com proteção de plásticos UV.</p>
-                </div>
-            </div>
-
-            <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
-                <div class="relative overflow-hidden group">
-                    <img src="hb20.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="HB20">
-                    <div class="absolute top-4 left-4 bg-brand-orange text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Estética</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-display text-lg text-white mb-2 uppercase text-decoration-none">HYUNDAI HB20</h3>
-                    <p class="text-gray-500 text-xs mb-6">Proteção de pintura 9H e descontaminação ferrosa.</p>
-                    <button onclick="toggleDetail('detail4')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
-                </div>
-                <div id="detail4" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
-                    <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Carro de frota transformado. Pintura revigorada e protegida contra as intempéries da cidade.</p>
-                </div>
-            </div>
-
-            <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
-                <div class="relative overflow-hidden group">
-                    <img src="maveco.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Ford Maverick">
-                    <div class="absolute top-4 left-4 bg-red-700 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Muscle BR</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-display text-lg text-white mb-2 uppercase text-decoration-none">FORD MAVERICK</h3>
-                    <p class="text-gray-500 text-xs mb-6">Correção de pintura e proteção de chassi.</p>
-                    <button onclick="toggleDetail('detail5')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
-                </div>
-                <div id="detail5" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
-                    <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Limpeza criogênica de motor e chassi, seguida de proteção anticorrosiva. Visual original preservado.</p>
-                </div>
-            </div>
-
-            <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-cyan/40 h-fit overflow-hidden">
-                <div class="relative overflow-hidden group">
-                    <img src="argo.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Fiat Argo">
-                    <div class="absolute top-4 left-4 bg-brand-cyan text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Urban Up</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-display text-lg text-white mb-2 uppercase text-decoration-none">FIAT ARGO</h3>
-                    <p class="text-gray-500 text-xs mb-6">Pintura de pinças em Laranja Mumpi e rodas Gloss Black.</p>
-                    <button onclick="toggleDetail('detail6')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-black transition">Saiba Mais</button>
-                </div>
-                <div id="detail6" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
-                    <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Pequenos detalhes, grande diferença. Customização de rodas e pinças para um visual esportivo discreto.</p>
-                </div>
-            </div>
-
-            <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
-                <div class="relative overflow-hidden group">
-                    <img src="agile.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Agile">
-                    <div class="absolute top-4 left-4 bg-brand-orange text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Revitalização</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-display text-lg text-white mb-2 uppercase text-decoration-none">CHEVROLET AGILE LTZ</h3>
-                    <p class="text-gray-500 text-xs mb-6">Revitalização de faróis e higienização interna técnica.</p>
-                    <button onclick="toggleDetail('detail7')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
-                </div>
-                <div id="detail7" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
-                    <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">O 2013 com cara de novo. Removemos o amarelado dos faróis com polimento específico e proteção UV duradoura.</p>
-                </div>
-            </div>
-
-            <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-cyan/40 h-fit overflow-hidden">
-                <div class="relative overflow-hidden group">
-                    <img src="fit.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Honda Fit">
-                    <div class="absolute top-4 left-4 bg-brand-cyan text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Daily care</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-display text-lg text-white mb-2 uppercase text-decoration-none">HONDA FIT AT 2006</h3>
-                    <p class="text-gray-500 text-xs mb-6">Polimento comercial e selagem de pintura com cera premium.</p>
-                    <button onclick="toggleDetail('detail8')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-black transition">Saiba Mais</button>
-                </div>
-                <div id="detail8" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
-                    <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Tratamento focado em brilho e custo-benefício. O clássico japonês recebeu proteção contra sol e chuva para o dia a dia.</p>
-                </div>
-            </div>
-
-            <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
-                <div class="relative overflow-hidden group">
-                    <img src="civic.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="Civic">
-                    <div class="absolute top-4 left-4 bg-gray-600 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Iconic</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-display text-lg text-white mb-2 uppercase text-decoration-none">HONDA CIVIC LXL</h3>
-                    <p class="text-gray-500 text-xs mb-6">Descontaminação de pintura e aplicação de coating rápido.</p>
-                    <button onclick="toggleDetail('detail9')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
-                </div>
-                <div id="detail9" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
-                    <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">O lendário 'New Civic' tratado com carinho. Removemos impurezas da lataria e finalizamos com proteção hidrofóbica.</p>
-                </div>
-            </div>
-
-            <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-cyan/40 h-fit overflow-hidden">
-                <div class="relative overflow-hidden group">
-                    <img src="king.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="BYD King">
-                    <div class="absolute top-4 left-4 bg-brand-cyan text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest">EV Next Gen</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-display text-lg text-white mb-2 uppercase text-decoration-none">BYD KING</h3>
-                    <p class="text-gray-500 text-xs mb-6">Proteção PPF Full e otimização de interface interna.</p>
-                    <button onclick="toggleDetail('detail10')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-black transition">Saiba Mais</button>
-                </div>
-                <div id="detail10" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
-                    <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Blindagem invisível com PPF de alta regeneração. Proteção total contra detritos de estrada.</p>
-                </div>
-            </div>
-
-            <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-orange/40 h-fit overflow-hidden">
-                <div class="relative overflow-hidden group">
-                    <img src="x2.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="BMW X2">
-                    <div class="absolute top-4 left-4 bg-brand-orange text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Matte Wrap</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-display text-lg text-white mb-2 uppercase text-decoration-none">BMW X2</h3>
-                    <p class="text-gray-500 text-xs mb-6">Envelopamento Fosco e suspensão preparada.</p>
-                    <button onclick="toggleDetail('detail11')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-white transition">Saiba Mais</button>
-                </div>
-                <div id="detail11" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
-                    <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Acabamento Matte Satin e rebaixamento milimétrico para um stance perfeito.</p>
-                </div>
-            </div>
-
-            <div class="glass border border-white/10 flex flex-col transition-all duration-500 hover:border-brand-cyan/40 h-fit overflow-hidden">
-                <div class="relative overflow-hidden group">
-                    <img src="golf.png" class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition duration-700" alt="VW Golf">
-                    <div class="absolute top-4 left-4 bg-brand-cyan text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest">Aerodynamics</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-display text-lg text-white mb-2 uppercase text-decoration-none">VW GOLF MK7.5</h3>
-                    <p class="text-gray-500 text-xs mb-6">Full Body Kit e rodas forjadas sob medida.</p>
-                    <button onclick="toggleDetail('detail12')" class="w-full border border-white/10 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-brand-cyan hover:text-black transition">Saiba Mais</button>
-                </div>
-                <div id="detail12" class="hidden px-6 pb-6 pt-2 border-t border-white/5 bg-white/[0.02] animate-fade-in-up">
-                    <p class="text-[11px] text-gray-400 leading-relaxed italic uppercase tracking-tighter">Transformação completa com envelopamento fosco diferenciado e rodas leves.</p>
-                </div>
-            </div>
-
-        </div> 
-    </div> 
-</section> 
-
-
-
-    <script>
-        function toggleDetail(id) {
-            const detail = document.getElementById(id);
-            if (detail.classList.contains('hidden')) {
-                detail.classList.remove('hidden');
-            } else {
-                detail.classList.add('hidden');
-            }
-        }
-    </script>
-
-   <section id="testimonials" class="py-24 bg-brand-dark overflow-hidden">
+    <section id="testimonials" class="py-24 bg-brand-dark overflow-hidden">
     <div class="container mx-auto px-6">
         
         <div class="text-center mb-16">
